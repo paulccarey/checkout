@@ -23,5 +23,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'monetize', '~> 1.9', '>= 1.9.4'
   spec.add_runtime_dependency 'money', '~> 6.13', '>= 6.13.8'
   spec.add_runtime_dependency 'dry-types', '~> 1.4'
-  
+  spec.add_runtime_dependency 'dry-struct', '~> 1.3'
 end
