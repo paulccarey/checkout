@@ -9,4 +9,7 @@
 
 # rspec failure tracking
 .rspec_status
+
+# editors
 .vscode
+.idea/
