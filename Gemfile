@@ -13,4 +13,5 @@ group :test do
   gem "pry-byebug"
   gem "rspec", "~> 3.0"
   gem "turnip"
+  gem "rspec-dry-struct"
 end
