@@ -4,7 +4,6 @@ require 'spec_helper'
 
 RSpec.describe Checkout do
   describe '.new' do
-
     it 'instantiates a basket with the provided promotions' do
       allow(Checkout::Basket).to receive(:new)
       Checkout.new(:promotions)

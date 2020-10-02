@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'dry-struct'
-
 module Checkout
   # Represents a product that can be added to a basket
   class Product < Dry::Struct
