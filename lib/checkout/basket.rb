@@ -15,11 +15,11 @@ module Checkout
         raise ItemNotProductError, "Only items of type #{Checkout::Product.name} can be scanned"
       end
 
-      line_item =  line_items.find { |line_item| line_item.code == product.code }
-      if(line_item)
-        line_item.quantity = line_item.quantity+1
+      line_item = line_items.find { |li| li.code == product.code }
+      if line_item
+        line_item.quantity = line_item.quantity + 1
       else
-        line_items << LineItem.new(code: product.code, description: product.name, unit_price: product.price, quantity: 1)
+        line_items << product.as_line_item(quantity: 1)
       end
     end
 

@@ -6,7 +6,7 @@ module Checkout
   # Represents a product that can be added to a basket
   class LineItem < Dry::Struct
     include Dry::Struct::Setters
-    
+
     transform_keys(&:to_sym)
 
     attribute :code, Checkout::Types::ProductCode.optional

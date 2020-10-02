@@ -11,6 +11,7 @@ require 'checkout/product'
 require 'checkout/line_item'
 require 'checkout/basket'
 
+# Checkout is an implementation of the checkout code challenge
 module Checkout
   class Error < StandardError; end
 

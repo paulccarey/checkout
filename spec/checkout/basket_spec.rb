@@ -3,6 +3,7 @@
 require 'spec_helper'
 
 module Checkout
+  # rubocop:disable Metrics/BlockLength
   RSpec.describe Basket do
     subject { described_class }
 
@@ -19,10 +20,9 @@ module Checkout
       let(:product) { Checkout::Product.new('code': '001', 'name': 'Lavender heart', 'price': '£9.25') }
 
       context 'product has not been previously scanned' do
-
         it 'adds creates a new line item using the product details' do
           basket.scan(product)
-          line_item = basket.line_items.find { |line_item| line_item.code == product.code }
+          line_item = basket.line_items.find { |li| li.code == product.code }
           expect(line_item.code).to eq(product.code)
           expect(line_item.description).to eq(product.name)
           expect(line_item.unit_price).to eq(product.price)
@@ -31,14 +31,13 @@ module Checkout
       end
 
       context 'product is scanned multiple times' do
-
         before(:each) do
           basket.scan(product)
         end
 
         it 'increments the quantity of an existing line item' do
           basket.scan(product)
-          line_item = basket.line_items.find { |line_item| line_item.code == product.code }
+          line_item = basket.line_items.find { |li| li.code == product.code }
           expect(line_item.code).to eq(product.code)
           expect(line_item.description).to eq(product.name)
           expect(line_item.unit_price).to eq(product.price)
@@ -55,8 +54,7 @@ module Checkout
     end
 
     describe '#total' do
-
-
     end
   end
+  # rubocop:enable Metrics/BlockLength
 end

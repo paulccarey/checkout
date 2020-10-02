@@ -8,5 +8,9 @@ module Checkout
     attribute :code, Checkout::Types::ProductCode
     attribute :name, Checkout::Types::String
     attribute :price, Checkout::Types::Money
+
+    def as_line_item(quantity: 1)
+      LineItem.new(code: product.code, description: product.name, unit_price: product.price, quantity: quantity)
+    end
   end
 end
