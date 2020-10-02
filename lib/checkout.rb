@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'checkout/version'
 require 'money'
 require 'checkout/types'
