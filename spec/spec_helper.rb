@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "turnip/rspec"
+require 'rspec/dry/struct'
 require "checkout"
 
 

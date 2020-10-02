@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'rspec/dry/struct'
 
 module Checkout
   RSpec.describe Product do

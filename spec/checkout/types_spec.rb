@@ -11,5 +11,13 @@ module Checkout
         expect(money_instance.currency.id).to eq(:eur)
       end
     end
+
+    describe 'Proc' do
+
+      it 'rejects anything that is not a Proc' do
+        expect { described_class::Proc['not a proc'] }.to raise_error(Dry::Types::ConstraintError)
+        expect { described_class::Proc[Proc.new { puts 'hello from proc' }] }.to_not raise_error
+      end
+    end
   end
 end
