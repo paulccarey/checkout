@@ -7,13 +7,14 @@ step 'there are the following products:' do |table|
   end
 end
 
-step 'there is a promotion giving :percent% off when you spend over :amount' do |percent, amount|
-  percent_discount_proc = proc { |total| total - (total * ((1 * 100) - percent.to_i) / 100) }
+step 'there is a promotion giving :percent% off when you spend over £:amount' do |percent, amount|
+  fractional = (100 - percent.to_f) / 100
+  percent_discount_proc = proc { |total| total - (total * fractional) }
   @promotions ||= []
   @promotions <<
     Checkout::Promotions::ThresholdDiscountPromotion.new(
-      discount_threshold: Monetize.parse(amount),
-      discount_proc: percent_discount_proc,
-      description: "%#{percent} off when you spend over #{amount}"
+      discount_threshold: Monetize.parse("£#{amount}"),
+      discounting_proc: percent_discount_proc,
+      description: "%#{percent} off when you spend over £#{amount}"
     )
 end
