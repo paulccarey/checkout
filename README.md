@@ -26,8 +26,5 @@ This includes acceptance tests and unit tests.
 
 ## Potential Improvements
 
-### Add LineItem
-Could introduce the concept of a LineItem, these would get created as instances of Product's and could be used to 
-store/apply discounts and deal with special cases e.g: a one off damaged item, etc... essentially providing some 
-additional flexibility. If the data was persisted this would be required anyway for data integrity in the case of updates 
-to Product's.
+### Promotion Language/Parsing
+Implement a human editable/configurable promotions engine

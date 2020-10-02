@@ -24,7 +24,12 @@ module Checkout
     end
 
     def total
-      line_items.collect(&:line_total).sum
+      line_items_with_discounts = promotions.each_with_object(line_items.clone) do |promotion, line_items|
+        discount_item = promotion.calculate_discount(line_items)
+        line_items << discount_item unless discount_item.nil?
+      end
+
+      line_items_with_discounts.collect(&:line_total).sum
     end
   end
 end

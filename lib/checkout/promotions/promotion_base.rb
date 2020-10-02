@@ -5,6 +5,8 @@ module Checkout
     # Base class used for other concrete promotions to inherit from
     class PromotionBase < Dry::Struct
       attribute :description, Checkout::Types::String
+
+      def calculate_discount(line_items); end
     end
   end
 end

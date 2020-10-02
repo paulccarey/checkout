@@ -54,13 +54,39 @@ module Checkout
     end
 
     describe '#total' do
-      it 'adds together all of the line_items' do
-        line_item1 = Checkout::LineItem.new(code: '001', description: 'Lavender heart',
-                                            unit_price: Monetize.parse('£9.25'), quantity: 2)
-        line_item2 = Checkout::LineItem.new(code: '002', description: 'Personalised cufflinks',
-                                            unit_price: Monetize.parse('£45.00'), quantity: 1)
-        basket = Checkout::Basket.new(line_items: [line_item1, line_item2])
-        expect(basket.total).to eq(Monetize.parse('£63.50'))
+      let(:line_item1) do
+        Checkout::LineItem.new(code: '001', description: 'Lavender heart',
+                               unit_price: Monetize.parse('£9.25'), quantity: 2)
+      end
+      let(:line_item2) do
+        Checkout::LineItem.new(code: '002', description: 'Personalised cufflinks',
+                               unit_price: Monetize.parse('£45.00'), quantity: 1)
+      end
+
+      let(:basket) { Checkout::Basket.new(line_items: [line_item1, line_item2], promotions: promotions) }
+
+      context 'no promotions' do
+        let(:promotions) { [] }
+
+        it 'adds together all of the line_items' do
+          expect(basket.total).to eq(Monetize.parse('£63.50'))
+        end
+      end
+
+      context 'with a discounted product promotion' do
+        let(:product_discount_promotion) do
+          Checkout::Promotions::ProductDiscountPromotion.new(
+            product_code: '001',
+            discounted_price: Monetize.parse('£8.50'),
+            quantity_threshold: 2,
+            description: 'Lavender heart discount'
+          )
+        end
+        let(:promotions) { [product_discount_promotion] }
+
+        it 'discounts the appropriate products' do
+          expect(basket.total).to eq(Monetize.parse('£62.00'))
+        end
       end
     end
   end
