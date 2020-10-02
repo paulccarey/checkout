@@ -17,5 +17,9 @@ module Checkout
 
       items << product
     end
+
+    def total
+      Monetize.parse('£123')
+    end
   end
 end

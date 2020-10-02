@@ -30,3 +30,14 @@ step 'there is a promotion reducing the price of ":product_name" / :product_code
       description: "#{product_name} discount to #{discounted_price} when buying #{quantity_threshold} or more"
     )
 end
+
+step 'the basket has the following product codes :product_codes' do |product_codes|
+  @basket = Checkout.new(@promotions)
+  product_codes.split(', ').each do |product_code|
+    @basket.scan(@products[product_code])
+  end
+end
+
+step 'the total price should be :total' do |total|
+  expect(@basket.total).to eq(Monetize.parse(total))
+end
