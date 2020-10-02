@@ -24,7 +24,7 @@ module Checkout
     end
 
     def total
-      Monetize.parse('£123')
+      line_items.collect(&:line_total).sum
     end
   end
 end

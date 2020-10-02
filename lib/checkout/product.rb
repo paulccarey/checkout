@@ -10,7 +10,7 @@ module Checkout
     attribute :price, Checkout::Types::Money
 
     def as_line_item(quantity: 1)
-      LineItem.new(code: product.code, description: product.name, unit_price: product.price, quantity: quantity)
+      LineItem.new(code: code, description: name, unit_price: price, quantity: quantity)
     end
   end
 end

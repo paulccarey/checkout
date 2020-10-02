@@ -13,5 +13,9 @@ module Checkout
     attribute :description, Checkout::Types::String
     attribute :unit_price, Checkout::Types::Money
     attribute :quantity, Checkout::Types::Integer
+
+    def line_total
+      unit_price * quantity
+    end
   end
 end

@@ -54,6 +54,14 @@ module Checkout
     end
 
     describe '#total' do
+      it 'adds together all of the line_items' do
+        line_item1 = Checkout::LineItem.new(code: '001', description: 'Lavender heart',
+                                            unit_price: Monetize.parse('£9.25'), quantity: 2)
+        line_item2 = Checkout::LineItem.new(code: '002', description: 'Personalised cufflinks',
+                                            unit_price: Monetize.parse('£45.00'), quantity: 1)
+        basket = Checkout::Basket.new(line_items: [line_item1, line_item2])
+        expect(basket.total).to eq(Monetize.parse('£63.50'))
+      end
     end
   end
   # rubocop:enable Metrics/BlockLength
