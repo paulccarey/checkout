@@ -73,19 +73,27 @@ module Checkout
         end
       end
 
-      context 'with a discounted product promotion' do
-        let(:product_discount_promotion) do
-          Checkout::Promotions::ProductDiscountPromotion.new(
-            product_code: '001',
-            discounted_price: Monetize.parse('£8.50'),
-            quantity_threshold: 2,
-            description: 'Lavender heart discount'
+      context 'with promotions' do
+        let(:promotion1) {  Checkout::Promotions::PromotionBase.new }
+        let(:promotion2) {  Checkout::Promotions::PromotionBase.new }
+        let(:promotions) { [promotion1, promotion2] }
+
+        before(:each) do
+          allow(promotion1).to receive(:calculate_discount).and_return(
+            LineItem.new(
+              code: nil, description: '£5 discount', unit_price: Monetize.parse('-£5.00'), quantity: 1
+            )
+          )
+
+          allow(promotion2).to receive(:calculate_discount).and_return(
+            LineItem.new(
+              code: nil, description: '£2.50 discount', unit_price: Monetize.parse('-£2.50'), quantity: 2
+            )
           )
         end
-        let(:promotions) { [product_discount_promotion] }
 
-        it 'discounts the appropriate products' do
-          expect(basket.total).to eq(Monetize.parse('£62.00'))
+        it 'discounts checks if any promotions need to be applied' do
+          expect(basket.total).to eq(Monetize.parse('£53.50'))
         end
       end
     end
