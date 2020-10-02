@@ -17,6 +17,10 @@ module Checkout
           code: nil, description: description, unit_price: discount_per_unit, quantity: matching_line_item.quantity
         )
       end
+
+      def application_order
+        1
+      end
     end
   end
 end

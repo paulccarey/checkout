@@ -76,7 +76,8 @@ module Checkout
       context 'with promotions' do
         let(:promotion1) {  Checkout::Promotions::PromotionBase.new }
         let(:promotion2) {  Checkout::Promotions::PromotionBase.new }
-        let(:promotions) { [promotion1, promotion2] }
+        let(:promotion3) {  Checkout::Promotions::PromotionBase.new }
+        let(:promotions) { [promotion3, promotion1, promotion2] }
 
         before(:each) do
           allow(promotion1).to receive(:calculate_discount).and_return(
@@ -84,15 +85,28 @@ module Checkout
               code: nil, description: '£5 discount', unit_price: Monetize.parse('-£5.00'), quantity: 1
             )
           )
+          allow(promotion1).to receive(:application_order).and_return(1)
 
           allow(promotion2).to receive(:calculate_discount).and_return(
             LineItem.new(
               code: nil, description: '£2.50 discount', unit_price: Monetize.parse('-£2.50'), quantity: 2
             )
           )
+          allow(promotion2).to receive(:application_order).and_return(1)
+
+          allow(promotion3).to receive(:calculate_discount) do |args|
+            current_total = args.collect(&:line_total).sum
+            if current_total.to_i > 60
+              LineItem.new(
+                code: nil, description: '£50 discount', unit_price: Monetize.parse('-£50'), quantity: 2
+              )
+
+            end
+          end
+          allow(promotion3).to receive(:application_order).and_return(2)
         end
 
-        it 'discounts checks if any promotions need to be applied' do
+        it 'applies any applicable discounts in the correct order' do
           expect(basket.total).to eq(Monetize.parse('£53.50'))
         end
       end
