@@ -9,7 +9,7 @@ module Checkout
 
       it { is_expected.to have_attribute(:discount_threshold, Checkout::Types::Money) }
       it { is_expected.to have_attribute(:discounting_proc, Checkout::Types::Proc) }
-      it { is_expected.to have_attribute(:description, Checkout::Types::String) }
+      it { is_expected.to have_attribute(:description, Checkout::Types::String.optional.default(nil)) }
     end
   end
 end
