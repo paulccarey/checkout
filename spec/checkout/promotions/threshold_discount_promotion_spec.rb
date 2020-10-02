@@ -10,7 +10,7 @@ module Checkout
 
       it { is_expected.to have_attribute(:discount_threshold, Checkout::Types::Money) }
       it { is_expected.to have_attribute(:discounting_proc, Checkout::Types::Proc) }
-      it { is_expected.to have_attribute(:description, Checkout::Types::String.optional.default(nil)) }
+      it { is_expected.to have_attribute(:description, Checkout::Types::String.optional.default { nil }) }
 
       describe '#calculate_discount' do
         let(:line_item1) do

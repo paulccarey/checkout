@@ -15,6 +15,8 @@ require 'checkout/basket'
 module Checkout
   class Error < StandardError; end
 
+  Money.default_currency = Money::Currency.new('GBP')
+
   def self.new(promotions)
     Basket.new(promotions: promotions)
   end

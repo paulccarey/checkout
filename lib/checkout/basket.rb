@@ -5,8 +5,10 @@ module Checkout
   class Basket < Dry::Struct
     transform_keys(&:to_sym)
 
-    attribute :promotions, Types::Array.of(Types.Instance(Checkout::Promotions::PromotionBase)).default([])
-    attribute :line_items, Types::Array.of(Types.Instance(Checkout::LineItem)).default([])
+    # rubocop:disable Lint/AmbiguousBlockAssociation
+    attribute :promotions, Types::Array.of(Types.Instance(Checkout::Promotions::PromotionBase)).default { [] }
+    attribute :line_items, Types::Array.of(Types.Instance(Checkout::LineItem)).default { [] }
+    # rubocop:enable Lint/AmbiguousBlockAssociation
 
     class ItemNotProductError < StandardError; end
 

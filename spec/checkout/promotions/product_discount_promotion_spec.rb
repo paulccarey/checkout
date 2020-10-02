@@ -11,7 +11,7 @@ module Checkout
       it { is_expected.to have_attribute(:product_code, Checkout::Types::ProductCode) }
       it { is_expected.to have_attribute(:discounted_price, Checkout::Types::Money) }
       it { is_expected.to have_attribute(:quantity_threshold, Checkout::Types::Strict::Integer) }
-      it { is_expected.to have_attribute(:description, Checkout::Types::String.optional.default(nil)) }
+      it { is_expected.to have_attribute(:description, Checkout::Types::String.optional.default { nil }) }
 
       describe '#calculate_discount' do
         let(:line_item1) do

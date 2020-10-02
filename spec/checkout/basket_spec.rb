@@ -10,10 +10,14 @@ module Checkout
     it {
       is_expected.to have_attribute(
         :promotions,
-        Types::Array.of(Types.Instance(Checkout::Promotions::PromotionBase)).default([])
+        Types::Array.of(Types.Instance(Checkout::Promotions::PromotionBase)).default { [] }
       )
     }
-    it { is_expected.to have_attribute(:line_items, Types::Array.of(Types.Instance(Checkout::LineItem)).default([])) }
+    it {
+      is_expected.to have_attribute(
+        :line_items, Types::Array.of(Types.Instance(Checkout::LineItem)).default { [] }
+      )
+    }
 
     describe '#scan' do
       let(:basket) { Checkout::Basket.new(line_items: []) }
