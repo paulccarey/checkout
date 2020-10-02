@@ -1,40 +1,33 @@
 # Checkout
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/checkout`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome to checkout.
 
-TODO: Delete this and the text above, and describe your gem
+The code here is for the submission of the checkout code challenge as described within [checkout_challenge.md](checkout_challenge.md).
 
-## Installation
+## Installation and Usage
 
-Add this line to your application's Gemfile:
+Checkout the code locally using git.
 
-```ruby
-gem 'checkout'
-```
+    $ git clone git@github.com:paulccarey/checkout.git
+    
+Ensure the correct version of ruby using your version manager, for RVM this is     
 
-And then execute:
+    $ rvm use
+    
+Bundle install the gems
 
     $ bundle install
 
-Or install it yourself as:
+Primarly the code can be exercised via the test suite by running rspec
 
-    $ gem install checkout
+    $ bin/rspec spec
+    
+This includes acceptance tests and unit tests.
 
-## Usage
+## Potential Improvements
 
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/paulccarey/checkout. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/paulccarey/checkout/blob/master/CODE_OF_CONDUCT.md).
-
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+### Add LineItem
+Could introduce the concept of a LineItem, these would get created as instances of Product's and could be used to 
+store/apply discounts and deal with special cases e.g: a one off damaged item, etc... essentially providing some 
+additional flexibility. If the data was persisted this would be required anyway for data integrity in the case of updates 
+to Product's.
