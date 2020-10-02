@@ -19,5 +19,14 @@ module Checkout
         expect { described_class::Proc[Proc.new { puts 'hello from proc' }] }.to_not raise_error
       end
     end
+
+    describe 'ProductCode' do
+
+      it 'only accepts values that are three numeric digits' do
+        expect { described_class::ProductCode['001']}.to_not raise_error
+        expect { described_class::ProductCode['0001']}.to raise_error(Dry::Types::ConstraintError)
+        expect { described_class::ProductCode['ABC']}.to raise_error(Dry::Types::ConstraintError)
+      end
+    end
   end
 end

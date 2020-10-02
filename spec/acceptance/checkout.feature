@@ -6,7 +6,7 @@ Feature: Checkout
      | 002   | Personalised cufflinks | £45.00 |
      | 003   | Kids T-shirt           | £19.95 |
     And there is a promotion giving 10% off when you spend over £60
-    And there is a promotion reducing the price of lavender hearts/001 down to £8.50 when buying 2 or more
+    And there is a promotion reducing the price of "lavender hearts" / 001 down when buying 2 or more to "£8.50"
   Scenario: 10% off promotion is applied
     When the basket the following product codes 001, 002, 003
     Then the total price should be £66.78

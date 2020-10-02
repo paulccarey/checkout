@@ -7,5 +7,6 @@ module Checkout
 
     Money = Types.Constructor(Money) { |value|  Monetize.parse(value,:gbp, assume_from_symbol: true ) }
     Proc = Types.Instance(Proc)
+    ProductCode = Types::String.constrained(format: /^\d{3}$/)
   end
 end

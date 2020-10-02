@@ -18,3 +18,15 @@ step 'there is a promotion giving :percent% off when you spend over £:amount' d
       description: "%#{percent} off when you spend over £#{amount}"
     )
 end
+
+step 'there is a promotion reducing the price of ":product_name" / :product_code down when buying '\
+      ':quantity_threshold or more to :amount' do |product_name, product_code, quantity_threshold, discounted_price|
+  @promotions ||= []
+  @promotions <<
+    Checkout::Promotions::ProductDiscountPromotion.new(
+      product_code: product_code,
+      discounted_price: Monetize.parse(discounted_price),
+      quantity_threshold: quantity_threshold.to_i,
+      description: "#{product_name} discount to #{discounted_price} when buying #{quantity_threshold} or more"
+    )
+end
