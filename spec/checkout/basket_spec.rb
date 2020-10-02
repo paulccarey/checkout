@@ -24,7 +24,7 @@ module Checkout
       let(:product) { Checkout::Product.new('code': '001', 'name': 'Lavender heart', 'price': '£9.25') }
 
       context 'product has not been previously scanned' do
-        it 'adds creates a new line item using the product details' do
+        it 'adds a new line item using the product details' do
           basket.scan(product)
           line_item = basket.line_items.find { |li| li.code == product.code }
           expect(line_item.code).to eq(product.code)
@@ -110,7 +110,8 @@ module Checkout
           allow(promotion3).to receive(:application_order).and_return(2)
         end
 
-        it 'applies any applicable discounts in the correct order' do
+        it 'applies discounts in the correct order (skipping discounts that should not be apppled due to the effects '\
+            'of previous promotions)' do
           expect(basket.total).to eq(Monetize.parse('£53.50'))
         end
       end
