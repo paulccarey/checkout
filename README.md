@@ -31,4 +31,4 @@ This includes acceptance tests and unit tests.
 
 ### Promotion Language/Parsing
 Currently promotions are setup by passing instances of objects into the checkout (or the basket).
-It would be ideal if these where configurable with some a human readable configuration DSL or data structure.
+It would be ideal if these where configurable with some sort of human readable configuration DSL or data structure.
