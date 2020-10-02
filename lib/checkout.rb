@@ -8,6 +8,7 @@ require 'checkout/promotions/promotion_base'
 require 'checkout/promotions/threshold_discount_promotion'
 require 'checkout/promotions/product_discount_promotion'
 require 'checkout/product'
+require 'checkout/line_item'
 require 'checkout/basket'
 
 module Checkout

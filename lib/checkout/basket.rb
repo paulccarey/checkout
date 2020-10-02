@@ -6,7 +6,7 @@ module Checkout
     transform_keys(&:to_sym)
 
     attribute :promotions, Types::Array.of(Types.Instance(Checkout::Promotions::PromotionBase)).default([])
-    attribute :items, Types::Array.of(Types.Instance(Checkout::Product)).default([])
+    attribute :line_items, Types::Array.of(Types.Instance(Checkout::LineItem)).default([])
 
     class ItemNotProductError < StandardError; end
 
@@ -15,7 +15,12 @@ module Checkout
         raise ItemNotProductError, "Only items of type #{Checkout::Product.name} can be scanned"
       end
 
-      items << product
+      line_item =  line_items.find { |line_item| line_item.code == product.code }
+      if(line_item)
+        line_item.quantity = line_item.quantity+1
+      else
+        line_items << LineItem.new(code: product.code, description: product.name, unit_price: product.price, quantity: 1)
+      end
     end
 
     def total
