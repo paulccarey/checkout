@@ -39,5 +39,5 @@ step 'the basket has the following product codes :product_codes' do |product_cod
 end
 
 step 'the total price should be :total' do |total|
-  expect(@basket.total).to eq(Monetize.parse(total))
+  expect(@basket.total).to eq(Monetize.parse(total, :gbp, assume_from_symbol: true))
 end

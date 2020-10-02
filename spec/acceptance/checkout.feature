@@ -15,4 +15,4 @@ Feature: Checkout
     Then the total price should be "£36.95"
   Scenario: Both promotions are applied
     When the basket has the following product codes "001, 002, 001, 003"
-    Then the total price should be "£73.73"
+    Then the total price should be "£73.76"
