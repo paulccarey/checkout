@@ -24,6 +24,9 @@ Primarly the code can be exercised via the test suite by running rspec
     
 This includes acceptance tests and unit tests.
 
+# Considerations
+- Promotions need to be applied in a specific order
+
 ## Potential Improvements
 
 ### Promotion Language/Parsing

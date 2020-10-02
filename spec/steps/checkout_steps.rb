@@ -15,7 +15,7 @@ step 'there is a promotion giving :percent% off when you spend over £:amount' d
     Checkout::Promotions::ThresholdDiscountPromotion.new(
       discount_threshold: Monetize.parse("£#{amount}", :gbp, assume_from_symbol: true),
       discounting_proc: percent_discount_proc,
-      description: "%#{percent} off when you spend over £#{amount}"
+      description: "#{percent}% off when you spend over £#{amount}"
     )
 end
 
