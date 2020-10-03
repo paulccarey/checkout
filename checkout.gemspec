@@ -23,7 +23,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'dry-struct', '~> 1.3'
-  spec.add_runtime_dependency 'dry-struct-setters', '~> 0.3.0'
   spec.add_runtime_dependency 'dry-types', '~> 1.4'
   spec.add_runtime_dependency 'monetize', '~> 1.9', '>= 1.9.4'
   spec.add_runtime_dependency 'money', '~> 6.13', '>= 6.13.8'

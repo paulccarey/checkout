@@ -1,12 +1,8 @@
 # frozen_string_literal: true
 
-require 'dry/struct/with_setters'
-
 module Checkout
-  # Represents a product that can be added to a basket
+  # Represents an instance of a product or discount in the basket
   class LineItem < Dry::Struct
-    include Dry::Struct::Setters
-
     transform_keys(&:to_sym)
 
     attribute :code, Checkout::Types::ProductCode.optional
@@ -16,6 +12,10 @@ module Checkout
 
     def line_total
       unit_price * quantity
+    end
+
+    def quantity=(new_quantity)
+      @attributes[:quantity] = new_quantity
     end
   end
 end
